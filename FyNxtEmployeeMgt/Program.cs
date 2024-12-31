@@ -1,4 +1,7 @@
 using FyNxtEmployeeMgt.Data;
+using FyNxtEmployeeMgt.Service;
+using FyNxtEmployeeMgt.Service.IService;
+using FyNxtEmployeeMgt.Utility;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,8 +15,13 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ApplicationDbContext>();
-builder.Services.AddControllersWithViews();
 
+builder.Services.AddHttpClient();
+builder.Services.AddHttpClient<IEmployeeService, EmployeeService>();
+builder.Services.AddScoped<IBaseService, BaseService>();
+builder.Services.AddScoped<IEmployeeService, EmployeeService>();
+Api.EmployeeAPIBase = builder.Configuration["ServiceUrls:EmployeeAPI"];
+builder.Services.AddControllersWithViews();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
