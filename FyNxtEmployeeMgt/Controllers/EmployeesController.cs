@@ -1,5 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using FyNxtEmployeeMgt.Models;
+using FyNxtEmployeeMgt.Service.IService;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Newtonsoft.Json;
 
 namespace FyNxtEmployeeMgt.Controllers
 {

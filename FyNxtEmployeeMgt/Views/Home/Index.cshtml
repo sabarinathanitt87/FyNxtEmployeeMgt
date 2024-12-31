@@ -3,6 +3,41 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4">Dashboard</h1>
+    <table id="employee" class="display nowrap" style="width:100%">
+        <thead>
+            <tr>
+                <th>First name</th>
+                <th>Last name</th>
+                <th>Email</th>
+                <th>Department</th>
+            </tr>
+        </thead>
+    </table>
 </div>
+
+@section scripts {
+    <script>
+        $(document).ready(function() {
+            $("#employee").dataTable({
+                "processing":true,
+                "serverSide": false,
+                "filter":true,
+                "orderMulti":true,
+                "ajax":{
+                    "url": "/Home/GetEmployees",
+                    "type": "POST",
+                    "datatype": "json",
+                },
+                "columns": [
+                    {"data":"FirstName","autoWidth":true},
+                    { "data": "LastName", "autoWidth": true },
+                    { "data": "Email", "autoWidth": true },
+                    { "data": "Department.DepartmentName", "autoWidth": true }
+
+                ]
+            });
+        });
+    </script>
+
+}
