@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35323.107
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FyNxtEmployeeMgt", "FyNxtEmployeeMgt\FyNxtEmployeeMgt.csproj", "{F6611A59-74F4-4C83-8A9D-F1B25F0D0B71}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FyNxtEmployeeMgtApi", "FyNxtEmployeeMgtApi\FyNxtEmployeeMgtApi.csproj", "{B8F154DD-90A2-49AA-AFA0-EF8ECE8BCD97}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F6611A59-74F4-4C83-8A9D-F1B25F0D0B71}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F6611A59-74F4-4C83-8A9D-F1B25F0D0B71}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F6611A59-74F4-4C83-8A9D-F1B25F0D0B71}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F6611A59-74F4-4C83-8A9D-F1B25F0D0B71}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B8F154DD-90A2-49AA-AFA0-EF8ECE8BCD97}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B8F154DD-90A2-49AA-AFA0-EF8ECE8BCD97}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B8F154DD-90A2-49AA-AFA0-EF8ECE8BCD97}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B8F154DD-90A2-49AA-AFA0-EF8ECE8BCD97}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {77496345-86C3-4ACD-8B47-DF42F68129FD}
+	EndGlobalSection
+EndGlobal
