@@ -20,6 +20,7 @@ builder.Services.AddHttpClient();
 builder.Services.AddHttpClient<IEmployeeService, EmployeeService>();
 builder.Services.AddScoped<IBaseService, BaseService>();
 builder.Services.AddScoped<IEmployeeService, EmployeeService>();
+builder.Services.AddScoped<IEmployeeKpiService, EmployeesKpiService>();
 Api.EmployeeAPIBase = builder.Configuration["ServiceUrls:EmployeeAPI"];
 builder.Services.AddControllersWithViews();
 var app = builder.Build();

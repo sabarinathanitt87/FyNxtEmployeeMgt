@@ -1,5 +1,6 @@
 ﻿using FyNxtEmployeeMgtApi.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Xml;
 
 namespace FyNxtEmployeeMgtApi.Data
 {
@@ -11,10 +12,18 @@ namespace FyNxtEmployeeMgtApi.Data
         public DbSet<Employee> Employee { get; set; }
         public DbSet<Department> Department { get; set; }
         public DbSet<AuditLog> AuditLog { get; set; }
+        public DbSet<EmployeeKPI> EmployeeKPI { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder
+            .Entity<EmployeeKPI>(builder =>
+            {
+                builder.HasNoKey();
+                builder.ToTable("EmployeeKPI");
+            });
             base.OnModelCreating(modelBuilder);
+
         }
     }
 }
