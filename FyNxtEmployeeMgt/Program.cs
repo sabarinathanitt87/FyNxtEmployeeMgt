@@ -2,6 +2,7 @@ using FyNxtEmployeeMgt.Data;
 using FyNxtEmployeeMgt.Service;
 using FyNxtEmployeeMgt.Service.IService;
 using FyNxtEmployeeMgt.Utility;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -14,6 +15,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+    .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
 builder.Services.AddHttpClient();
@@ -22,6 +24,7 @@ builder.Services.AddScoped<IBaseService, BaseService>();
 builder.Services.AddScoped<IEmployeeService, EmployeeService>();
 builder.Services.AddScoped<IEmployeeKpiService, EmployeesKpiService>();
 Api.EmployeeAPIBase = builder.Configuration["ServiceUrls:EmployeeAPI"];
+builder.Services.AddAuthorization();
 builder.Services.AddControllersWithViews();
 var app = builder.Build();
 
@@ -41,7 +44,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(

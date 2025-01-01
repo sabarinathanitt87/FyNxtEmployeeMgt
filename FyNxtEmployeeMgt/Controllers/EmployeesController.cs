@@ -1,11 +1,13 @@
 ﻿using FyNxtEmployeeMgt.Models;
 using FyNxtEmployeeMgt.Service.IService;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
 
 namespace FyNxtEmployeeMgt.Controllers
 {
+    [Authorize]
     public class EmployeesController : Controller
     {
         private readonly IEmployeeService _EmployeeService;
