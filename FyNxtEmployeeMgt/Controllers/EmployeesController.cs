@@ -12,9 +12,11 @@ namespace FyNxtEmployeeMgt.Controllers
     public class EmployeesController : Controller
     {
         private readonly IEmployeeService _EmployeeService;
-        public EmployeesController(IEmployeeService EmployeeService)
+        private readonly ILogger<EmployeesController> _logger;
+        public EmployeesController(IEmployeeService EmployeeService, ILogger<EmployeesController> logger)
         {
             _EmployeeService = EmployeeService;
+            _logger = logger;
         }
 
 

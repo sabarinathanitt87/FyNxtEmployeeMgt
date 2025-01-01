@@ -42,7 +42,7 @@ namespace FyNxtEmployeeMgt.Controllers
             }
             else
             {
-                TempData["error"] = response?.Message;
+                _logger.LogError(response?.Message);
             }
         }
        

@@ -9,12 +9,15 @@ namespace FyNxtEmployeeMgt.Controllers
     public class EmployeeKpiController : Controller
     {
         private readonly IEmployeeKpiService _EmployeeKpiService;
-        public EmployeeKpiController(IEmployeeKpiService EmployeeKpiService)
+        private readonly ILogger<EmployeeKpiController> _logger;
+        public EmployeeKpiController(IEmployeeKpiService EmployeeKpiService, ILogger<EmployeeKpiController> logger)
         {
             _EmployeeKpiService = EmployeeKpiService;
+            _logger = logger;
         }
         public async Task<IActionResult> Index()
         {
+            _logger.LogInformation("Char page viewed.");
             List<EmployeeKPI>? list = new();
 
 
@@ -26,7 +29,7 @@ namespace FyNxtEmployeeMgt.Controllers
             }
             else
             {
-                TempData["error"] = response?.Message;
+                _logger.LogError(response?.Message);
             }
             
             return View(list);
