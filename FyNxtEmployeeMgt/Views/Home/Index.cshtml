@@ -1,43 +1,55 @@
-﻿@{
+﻿@model IEnumerable<EmployeeDto>
+
+@{
     ViewData["Title"] = "Home Page";
 }
-
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.css">
+<script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js"></script>
 <div class="text-center">
     <h1 class="display-4">Dashboard</h1>
-    <table id="employee" class="display nowrap" style="width:100%">
+    <table id="employee" class="display">
         <thead>
             <tr>
                 <th>First name</th>
                 <th>Last name</th>
                 <th>Email</th>
                 <th>Department</th>
+                <th>Action</th>
             </tr>
         </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr data-id="@item.EmployeeId">
+                    <td>@item.FirstName</td>
+                    <td>@item.LastName</td>
+                    <td>@item.Email</td>
+                    <td>@item.Department.DepartmentName</td>
+                    <td>
+                        <button class="delete-btn">Delete</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
     </table>
 </div>
 
-@section scripts {
-    <script>
-        $(document).ready(function() {
-            $("#employee").dataTable({
-                "processing":true,
-                "serverSide": false,
-                "filter":true,
-                "orderMulti":true,
-                "ajax":{
-                    "url": "/Home/GetEmployees",
-                    "type": "POST",
-                    "datatype": "json",
-                },
-                "columns": [
-                    {"data":"FirstName","autoWidth":true},
-                    { "data": "LastName", "autoWidth": true },
-                    { "data": "Email", "autoWidth": true },
-                    { "data": "Department.DepartmentName", "autoWidth": true }
+<script>
+    $(document).ready(function() {
+        $('#employee').DataTable();
+    });
 
-                ]
-            });
+   
+    $(document).on('click', '.delete-btn', function() {
+        var row = $(this).closest('tr');
+        var id = row.data('id');
+        $.ajax({
+            url: '/Home/Delete/' + id,
+            type: 'POST',
+            success: function(response) {
+                row.remove();
+            }
         });
-    </script>
-
-}
+    });
+</script>

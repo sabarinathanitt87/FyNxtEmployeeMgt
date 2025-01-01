@@ -2,6 +2,7 @@ using System.Diagnostics;
 using FyNxtEmployeeMgt.Models;
 using FyNxtEmployeeMgt.Service.IService;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 
 namespace FyNxtEmployeeMgt.Controllers
@@ -17,12 +18,7 @@ namespace FyNxtEmployeeMgt.Controllers
             _EmployeeService = EmployeeService;
         }
 
-        public IActionResult Index()
-        {
-            return View();
-        }
-        [HttpPost]
-        public async Task<string> GetEmployees()
+        public async Task<IActionResult> Index()
         {
             List<EmployeeDto>? list = new();
 
@@ -33,14 +29,23 @@ namespace FyNxtEmployeeMgt.Controllers
             {
                 list = JsonConvert.DeserializeObject<List<EmployeeDto>>(Convert.ToString(response.Result));
             }
-            var result = JsonConvert.SerializeObject(new { data = list });
-            return result;
-
+            return View(list);
         }
-        public IActionResult Privacy()
+        [HttpPost]
+        public async void Delete(int id)
         {
-            return View();
+            ResponseDto? response = await _EmployeeService.GetEmployeeByIdAsync(id);
+
+            if (response != null && response.IsSuccess)
+            {
+                EmployeeDto? model = JsonConvert.DeserializeObject<EmployeeDto>(Convert.ToString(response.Result));
+            }
+            else
+            {
+                TempData["error"] = response?.Message;
+            }
         }
+       
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
